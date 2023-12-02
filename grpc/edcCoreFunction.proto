@@ -1,0 +1,43 @@
+syntax = "proto3";
+option go_package = ".";
+package WebEDC;
+
+message LoginRequest{
+    string username = 1;
+    string password = 2;
+}
+
+message LoginResponse{
+    string status = 1;
+    string jwt = 2;
+    bool isadmin = 3;
+}
+
+message SeeAllTransactionRequest{
+    string token = 1;
+}
+
+message SeeAllTransactionList{
+    string transactionid = 1;
+    string platenumber = 2;
+    string vehicletype = 3;
+    string intime = 4;
+    string outtime = 5;
+    double price = 6;
+    string edcidin = 7;
+    string edcidout = 8;
+    string operatorin = 9;
+    string operatorout = 10;
+    bool isdone = 11;
+}
+
+message SeeAllTransactionResponse{
+    string status = 1;
+    string jwt = 2;
+    repeated SeeAllTransactionList results = 3;
+}
+
+service EDCService {
+    rpc DoLogin(LoginRequest) returns (LoginResponse) {}
+    rpc DoSeeAllTransaction(SeeAllTransactionRequest) returns (SeeAllTransactionResponse) {}
+}
